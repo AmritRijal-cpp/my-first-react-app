@@ -1,0 +1,195 @@
+.navbar {
+    padding: 25px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .hamburger {
+        display: none;
+        cursor: pointer;
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: hsl(213, 5%, 45%);
+            transition: all 0.3s ease-in-out;
+        }
+
+    }
+
+    @media (max-width: 768px) {
+        .hamburger {
+            display: block;
+            padding-right: 20px;
+            z-index: 101;
+        }
+
+        .hamburger.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+
+        .hamburger.active .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+
+        .navMenu {
+            z-index: 100;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background-color: hsl(0, 0%, 100%);
+            padding: 100px 0 0 40px;
+            transition: 0.3s;
+
+        }
+
+        .navMenu.active {
+            left: 0;
+        }
+
+        .navBranding.active {
+            transition: all 0.3s ease-out;
+            color: transparent;
+        }
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .navBranding {
+        flex-grow: 1;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #000;
+    }
+
+    .navMenu {
+        flex-grow: 6;
+        display: flex;
+        justify-content: flex-start;
+        gap: 5%;
+    }
+
+    li {
+        list-style: none;
+
+        .navLinks {
+            color: hsl(219, 9%, 45%);
+        }
+    }
+
+    .cartProfile {
+        position: relative;
+        flex-grow: 1;
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: row;
+        gap: 15%;
+
+        .cartLogo {
+            align-self: center;
+            position: relative;
+
+            .numberOfProduct {
+                background-color: #ff7d1b;
+                border-radius: 10px;
+                font-size: 10px;
+                padding: 0 5px;
+                position: absolute;
+                bottom: 70%;
+                left: 10px;
+            }
+        }
+
+        .profile {
+            img {
+                height: 50px;
+                width: auto;
+            }
+        }
+
+        .cartLogo, .profile:hover {
+            cursor: pointer;
+        }
+
+        #cartOverlay {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            display: block;
+            position: absolute;
+            top: 110%;
+            right: -20px;
+            width: 350px;
+            height: auto;
+            box-shadow: 1px 10px 35px -4px rgba(0, 0, 0, 0.75);
+            z-index: 999;
+
+            #productList {
+                flex-direction: column;
+                justify-content: center;
+
+                .productImage {
+                    height: 50px;
+                    width: auto;
+                    border-radius: 5px;
+                }
+
+                .product {
+                    padding: 10px 0;
+                    font-size: 16px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .deleteCart:hover {
+                        cursor: pointer;
+                    }
+
+                    .productInfo {
+                        padding: 0 15px;
+                        color: hsl(213, 5%, 45%);
+
+                        .totalPrice {
+                            font-weight: bold;
+                            color: #000;
+                        }
+                    }
+                }
+
+                .checkout {
+                    padding: 10px 0;
+                    font-weight: bold;
+                    color: #fff;
+                    background-color: hsl(26, 100%, 55%);
+                    border: none;
+                    border-radius: 10px;
+                }
+
+                
+            }
+        }
+        @media (max-width: 768px) {
+            #cartOverlay {
+                width: 80vw;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+        .navbar{
+            padding: 20px 0;
+
+        }
+    }

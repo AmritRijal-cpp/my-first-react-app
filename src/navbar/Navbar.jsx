@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Navbar.css"
 
 function Navbar() {
     const [isHamburgerActive, setisHamburgerActive] = useState(false);
     const [isCartOpen, setIsCartOpen] = useState(false);
+    const [cartItems, setCartItems] = useState([]);
 
     const toggleMenu = () => {
         setisHamburgerActive(!isHamburgerActive);
     };
 
     const toggleCart = () => {
-        setIsCartOpen(!isCartOpen);
+        setIsCartOpen(preState => !isCartOpen);
+    };
+
+    useEffect(() => {
+        // Load cart data from localStorage on component mount
+        loadCart();
+    }, []);
+
+    const loadCart = () => {
+        const savedCart = JSON.parse(localStorage.getItem("cart")) || [];
+        setCartItems(savedCart);
     };
 
     return (
@@ -77,12 +88,14 @@ function Navbar() {
                                 alt="sneaker"
                                 className="productImage"
                             />
-                            <div className="productInfo">
-                                <span className="sneakerNameForCart" />
-                                <span className="price" /> x
-                                <span className="numberOfProduct" />
-                                <span className="totalPrice" />
-                            </div>
+                            {cartItems.map((item, index) => (
+                                <div key={item.name} className="productInfo">
+                                    <span className={item.name}></span>
+                                    <span className={item.price}></span> x
+                                    <span className={item.quantity}></span>
+                                    <span className={item.totalPrice}></span>
+                                </div>
+                            ))}
                             <img
                                 src="images/icon-delete.svg"
                                 alt="delete"
@@ -102,30 +115,5 @@ function Navbar() {
         </nav>
     )
 }
-
-// const hamburger = document.querySelector(".hamburger");
-// const navMenu = document.querySelector(".navMenu");
-// const navBranding = document.querySelector(".navBranding");
-// const overlay = document.createElement("div");
-// overlay.classList.add("overlay");
-
-// hamburger.addEventListener("click", () => {
-//   hamburger.classList.toggle("active");
-//   navMenu.classList.toggle("active");
-//   navBranding.classList.toggle("active");
-//   overlay.style.display = overlay.style.display === "block" ? "none" : "block";
-// });
-
-// document.body.appendChild(overlay);
-
-// document.querySelectorAll(".navItems").forEach((n) =>
-//   n.addEventListener("click", () => {
-//     hamburger.classList.remove("active");
-//     navMenu.classList.remove("active");
-//     navBranding.classList.remove("active");
-//     overlay.style.display =
-//       overlay.style.display === "block" ? "none" : "block";
-//   })
-// );
 
 export default Navbar

@@ -24,6 +24,10 @@ function Navbar() {
         setCartItems(savedCart);
     };
 
+    const deleteCart = () => {
+        localStorage.removeItem("cart");
+    }
+
     return (
         <nav className="navbar">
             <div className={`hamburger ${isHamburgerActive ? 'active' : ''}`}
@@ -99,7 +103,7 @@ function Navbar() {
                             <img
                                 src="images/icon-delete.svg"
                                 alt="delete"
-                                onClick={() => { CART.deleteCart() }}
+                                onClick={() => deleteCart() }
                                 className="deleteCart"
                             />
                         </div>
